@@ -1,7 +1,7 @@
-# flutter_rpg
+# RPG Manager
 
 An RPG character, skill, class manager. Written in Flutter/Dart with Firebase and FirebaseAuth.
-Hevily modified from [netninja](https://netninja.dev)
+Heavily modified from [netninja](https://netninja.dev)
 
 ## Features
 
