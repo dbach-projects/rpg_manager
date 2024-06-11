@@ -1,16 +1,20 @@
 # flutter_rpg
 
-A new Flutter project.
+An RPG character, skill, class manager. Written in Flutter/Dart with Firebase and FirebaseAuth.
+Hevily modified from [text](https://netninja.dev)
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- auth
+- create character, classes, and skills
+- add skills to classes
+- add skills to characters
+- add a class to a character
+- modifying the source skill or class will effect linked classes and characters
 
-A few resources to get you started if this is your first Flutter project:
+## Roadmap
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- more datafields for classes and skills
+- the ability to edit/delete classes and skills after creation
+- add on device stable diffusion for dynamic character/class/skill/inventory item images
+- map creator
