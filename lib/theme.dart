@@ -30,8 +30,8 @@ ThemeData primaryTheme = ThemeData(
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: AppColors.secondaryColor,
       surfaceTintColor: Colors.transparent,
-      iconTheme: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
+      iconTheme: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
           return const IconThemeData(
             color: Colors.black,
           );
@@ -40,8 +40,8 @@ ThemeData primaryTheme = ThemeData(
           color: Colors.grey,
         );
       }),
-      labelTextStyle: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
+      labelTextStyle: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
           return const TextStyle(
             fontSize: 13.0,
             fontWeight: FontWeight.w700,

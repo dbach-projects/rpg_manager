@@ -54,7 +54,7 @@ class _CurrentHealthState extends State<CurrentHealth> {
                   ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStatePropertyAll(AppColors.primaryColor),
+                            WidgetStatePropertyAll(AppColors.primaryColor),
                       ),
                       onPressed: () {
                         setState(() {
@@ -75,7 +75,7 @@ class _CurrentHealthState extends State<CurrentHealth> {
                 children: [
                   ElevatedButton(
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: WidgetStatePropertyAll(Colors.blue),
                       ),
                       onPressed: () {
                         setState(() {
@@ -94,7 +94,7 @@ class _CurrentHealthState extends State<CurrentHealth> {
                   ),
                   ElevatedButton(
                       style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        backgroundColor: WidgetStatePropertyAll(Colors.blue),
                       ),
                       onPressed: () {
                         setState(() {

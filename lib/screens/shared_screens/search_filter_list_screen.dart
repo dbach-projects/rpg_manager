@@ -1,29 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rpg/models/character.dart';
-import 'package:flutter_rpg/models/skill.dart';
 import 'package:flutter_rpg/screens/home_screen/bottom_navigation_bar.dart';
-import 'package:flutter_rpg/services/character_store.dart';
 import 'package:flutter_rpg/shared/styled_text.dart';
 import 'package:flutter_rpg/shared/styled_textfield.dart';
-import 'package:provider/provider.dart';
 
-class ChooseSkill extends StatefulWidget {
-  const ChooseSkill({super.key, required this.character, required this.skills});
+class SearchFilterListScreen extends StatefulWidget {
+  const SearchFilterListScreen(
+      {super.key,
+      required this.items,
+      this.itemPropertyToSearchBy,
+      this.itemPropertyToFilterBy,
+      this.onTap,
+      this.borderColor});
 
-  final Character character;
-  final List<Skill> skills;
+  final List<dynamic> items;
+  final String? itemPropertyToSearchBy;
+  final String? itemPropertyToFilterBy;
+  final Function? onTap;
+  final Function? borderColor;
 
   @override
-  State<ChooseSkill> createState() => _ChooseSkillState();
+  State<SearchFilterListScreen> createState() => _SearchFilterListScreenState();
 }
 
-class _ChooseSkillState extends State<ChooseSkill> {
-  List<Skill> _foundSkills = [];
+class _SearchFilterListScreenState extends State<SearchFilterListScreen> {
+  List<dynamic> _foundItems = [];
   final _searchController = TextEditingController();
 
   @override
   initState() {
-    _foundSkills = widget.skills;
+    // at the beginning, all users are shown
+    _foundItems = widget.items;
     super.initState();
   }
 
@@ -34,20 +40,21 @@ class _ChooseSkillState extends State<ChooseSkill> {
   }
 
   // This function is called whenever the text field changes
-  void _runFilter(String enteredKeyword) {
-    List<Skill> results = [];
+  void _runSearch(String enteredKeyword) {
+    List<dynamic> results = [];
     if (enteredKeyword.isEmpty) {
-      results = widget.skills;
+      results = widget.items;
     } else {
-      results = widget.skills
-          .where((skill) =>
-              skill.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
+      results = widget.items
+          .where((item) => item[widget.itemPropertyToSearchBy]
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
           .toList();
     }
 
     // Refresh the UI
     setState(() {
-      _foundSkills = results;
+      _foundItems = results;
     });
   }
 
@@ -67,7 +74,7 @@ class _ChooseSkillState extends State<ChooseSkill> {
               height: 20,
             ),
             StyledTextfield(
-                onChanged: (value) => _runFilter(value),
+                onChanged: (value) => _runSearch(value),
                 controller: _searchController,
                 label: 'Search',
                 textInputType: TextInputType.text,
@@ -76,42 +83,32 @@ class _ChooseSkillState extends State<ChooseSkill> {
               height: 20,
             ),
             Expanded(
-              child: _foundSkills.isNotEmpty
+              child: _foundItems.isNotEmpty
                   ? ListView.builder(
-                      itemCount: _foundSkills.length,
+                      itemCount: _foundItems.length,
                       itemBuilder: (context, index) => GestureDetector(
                             onTap: () {
-                              setState(() {
-                                widget.character
-                                    .toggleSkillId(_foundSkills[index].id);
-                                Provider.of<CharacterStore>(context,
-                                        listen: false)
-                                    .updateCharacterSkillsFirebase(
-                                        widget.character,
-                                        widget.character.skillIds);
-                              });
+                              widget.onTap!();
                             },
                             child: Container(
                               decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: widget.character.skillIds
-                                              .contains(_foundSkills[index].id)
-                                          ? Colors.yellow
-                                          : Colors.transparent,
-                                      width: 2)),
+                                      color: widget.borderColor!(), width: 2)),
                               margin: const EdgeInsets.all(5),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Image.asset(
-                                    'assets/img/skills/${_foundSkills[index].image}',
-                                    width: 70,
-                                  ),
+                                  _foundItems[index].image
+                                      ? Image.asset(
+                                          'assets/img/skills/${_foundItems[index].image}',
+                                          width: 70,
+                                        )
+                                      : const SizedBox(),
                                   const SizedBox(
                                     width: 10,
                                   ),
                                   StyledText(
-                                    _foundSkills[index].name,
+                                    _foundItems[index].name,
                                     textOverflow: TextOverflow.ellipsis,
                                     softWrap: false,
                                   )

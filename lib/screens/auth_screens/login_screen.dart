@@ -62,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: StyledTextfield(
+                    obscureText: true,
                     controller: passwordController,
                     textInputType: TextInputType.visiblePassword,
                     prefixIcon: const Icon(Icons.password),

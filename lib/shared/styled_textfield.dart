@@ -9,26 +9,33 @@ class StyledTextfield extends StatelessWidget {
       required this.controller,
       required this.label,
       required this.textInputType,
-      required this.prefixIcon,
+      this.prefixIcon,
+      this.sufixIcon,
+      this.obscureText = false,
       this.onChanged});
 
   final TextEditingController controller;
   final String label;
   final TextInputType textInputType;
-  final Icon prefixIcon;
+  final Icon? prefixIcon;
+  final Icon? sufixIcon;
+  final bool obscureText;
   final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      obscureText: obscureText,
       onChanged: onChanged,
       controller: controller,
       keyboardType: textInputType,
       style:
           GoogleFonts.kanit(textStyle: Theme.of(context).textTheme.bodyMedium),
       cursorColor: AppColors.textColor,
-      decoration:
-          InputDecoration(prefixIcon: prefixIcon, label: StyledText(label)),
+      decoration: InputDecoration(
+          prefixIcon: prefixIcon,
+          suffixIcon: sufixIcon,
+          label: StyledText(label)),
     );
   }
 }
