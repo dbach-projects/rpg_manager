@@ -76,8 +76,8 @@ class _SkillListState extends State<SkillList> {
             ),
 
             //vocation based skills
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Wrap(
+              alignment: WrapAlignment.start,
               children: vocationSkills.map((skill) {
                 return GestureDetector(
                   onTap: () {
@@ -101,7 +101,7 @@ class _SkillListState extends State<SkillList> {
                         ),
                       ),
                       SizedBox(
-                          width: 70,
+                          width: 100,
                           child: StyledText(
                             skill.name,
                             textOverflow: TextOverflow.ellipsis,

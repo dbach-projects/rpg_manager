@@ -87,23 +87,28 @@ class _LoginScreenState extends State<LoginScreen> {
                             nameController.text, passwordController.text);
                       },
                     )),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text('Do not have an account?'),
-                    TextButton(
-                      child: const Text(
-                        'Create Account',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (ctx) => const CreateAccountScreen()));
-                      },
-                    )
-                  ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    children: <Widget>[
+                      const Text('Do not have an account?',
+                          style: TextStyle(height: 3.3, fontSize: 15)),
+                      TextButton(
+                        child: const Text(
+                          'Create Account',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (ctx) =>
+                                      const CreateAccountScreen()));
+                        },
+                      )
+                    ],
+                  ),
                 ),
               ],
             )));
